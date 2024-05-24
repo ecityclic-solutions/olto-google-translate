@@ -38,6 +38,7 @@ const TranslationObject = ({
   const [activeMenu, setActiveMenu] = useState('language');
   const handleMenuClick = (e, { name }) => {
     setActiveMenu(name);
+    addGoogleTranslateButtons();
   };
 
   useEffect(() => {
@@ -74,22 +75,44 @@ const TranslationObject = ({
   const lang = translationObject.language.token;
 
   const formWrapperRef = useRef(null);
+  const addingButtonsInterval = useRef();
+
   const addGoogleTranslateButton = (node) => {
     if (node.classList.contains('block-translatable')) return;
     node.classList.add('block-translatable')
 
-    console.log(node)
-    console.log(node.textContent)
     if (!node.textContent) return;
 
     var div = document.createElement('div');
     ReactDOM.render(
-       <GoogleTranslateButton node={node} container={div}/>,
+       <GoogleTranslateButton node={node} container={div} intl={intl} />,
        node.appendChild(div)
     );
   }
 
+  const addGoogleTranslateButtonsInner = () => {
+    const blocks = document.querySelectorAll(".source-object .block-editor-slate")
+    for (const block of blocks) {
+      addGoogleTranslateButton(block)
+    }
+  }
+
+  const addGoogleTranslateButtons = () => {
+    let intervalIterations = 0
+    clearInterval(addingButtonsInterval.current)
+    addingButtonsInterval.current = setInterval(function() {
+      const blocks = document.querySelectorAll(".source-object .block-editor-slate")
+      if (blocks.length > 0 || intervalIterations > 100) {
+        addGoogleTranslateButtonsInner()
+        clearInterval(addingButtonsInterval.current)
+      } else {
+        intervalIterations += 1
+      }
+    }, 200)
+  }
+
   useEffect(() => {
+    addGoogleTranslateButtons()
     const formWrapper = formWrapperRef.current;
     let iterations = 0
 
@@ -97,12 +120,9 @@ const TranslationObject = ({
 
     const observer = new MutationObserver((mutationsList) => {
       iterations += 1
-      if (iterations > 20) return;
+      if (iterations > 5) return;
       for (let mutation of mutationsList) {
-        const blocks = document.querySelectorAll(".source-object .block-editor-slate")
-        for (const block of blocks) {
-          addGoogleTranslateButton(block)
-        }
+        addGoogleTranslateButtons()
       }
     });
     const config = { attributes: true, childList: true, subtree: true };
@@ -110,6 +130,7 @@ const TranslationObject = ({
 
     return () => {
       observer.disconnect();
+      clearInterval(addingButtonsInterval.current)
     };
   }, []);
 
@@ -177,7 +198,9 @@ const TranslationObject = ({
                         key={field}
                         onChange={() => {}}
                       />
-                      <GoogleTranslateButton/>
+                      {(item?.id === 'default' && schema.properties[field]?.type === 'string' && translationObject[field]) && (
+                        <GoogleTranslateButton value={translationObject[field]} intl={intl} />
+                      )}
                       </>
                     ))}
                   </Segment>,
