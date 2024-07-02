@@ -23,6 +23,7 @@ const messages = defineMessages({
 });
 import { GoogleTranslateButton } from '../../../../components';
 
+
 const TranslationObject = ({
   translationObject,
   schema,
@@ -73,6 +74,7 @@ const TranslationObject = ({
   );
 
   const lang = translationObject.language.token;
+  const targetLang = pathname.split('/')?.[1]
 
   const formWrapperRef = useRef(null);
   const addingButtonsInterval = useRef();
@@ -85,7 +87,11 @@ const TranslationObject = ({
 
     var div = document.createElement('div');
     ReactDOM.render(
-       <GoogleTranslateButton node={node} container={div} intl={intl} />,
+       <GoogleTranslateButton
+        node={node} container={div}
+        sourceLang={lang} targetLang={targetLang} intl={intl}
+        translationObject={translationObject}
+        />,
        node.appendChild(div)
     );
   }
@@ -132,7 +138,7 @@ const TranslationObject = ({
       observer.disconnect();
       clearInterval(addingButtonsInterval.current)
     };
-  }, []);
+  });
 
   return translationObject ? (
     <Provider store={store}>
@@ -169,8 +175,8 @@ const TranslationObject = ({
             pathname={flattenToAppURL(translationObject['@id'])}
             visual={visual}
             title={langmap[lang].nativeName}
-            isFormSelected={isFormSelected}
-            onSelectForm={onSelectForm}
+            // isFormSelected={isFormSelected}
+            // onSelectForm={onSelectForm}
             editable={false}
             onChange={() => {}}
           />
@@ -199,7 +205,10 @@ const TranslationObject = ({
                         onChange={() => {}}
                       />
                       {(item?.id === 'default' && schema.properties[field]?.type === 'string' && translationObject[field]) && (
-                        <GoogleTranslateButton value={translationObject[field]} intl={intl} />
+                        <GoogleTranslateButton
+                          fieldId={field} value={translationObject[field]}
+                          sourceLang={lang} targetLang={targetLang} intl={intl}
+                          translationObject={translationObject} />
                       )}
                       </>
                     ))}

@@ -1,3 +1,5 @@
 import GoogleTranslateButton from './GoogleTranslate/GoogleTranslateButton';
 
-export { GoogleTranslateButton }
+export {
+    GoogleTranslateButton,
+}

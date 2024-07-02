@@ -10,7 +10,7 @@ import { GET_GOOGLE_TRANSLATE_TEXT } from '../../constants/ActionTypes';
  * @function GetRegistry
  * @returns {Object} Get translation.
  */
-export function getGoogleTranslateText(text) {
+export function getGoogleTranslateText(text, sourceLang, targetLang) {
   return {
     type: GET_GOOGLE_TRANSLATE_TEXT,
     text: text,
@@ -18,7 +18,9 @@ export function getGoogleTranslateText(text) {
       op: 'post',
       path: `/@google_translate`,
       data: {
-        translate_text: text, 
+        translate_text: text,
+        source_lang: sourceLang,
+        target_lang: targetLang,
       },
     },
   };

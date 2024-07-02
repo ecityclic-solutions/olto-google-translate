@@ -9,7 +9,7 @@ const initialState = {
   error: null,
   loaded: false,
   loading: false,
-  translated_text: {},
+  translated_text: null,
 };
 
 export default function google_translate(state = initialState, action = {}) {
