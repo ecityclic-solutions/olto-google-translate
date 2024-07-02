@@ -55,6 +55,7 @@ class SlateEditor extends Component {
     this.createEditor = this.createEditor.bind(this);
     this.multiDecorator = this.multiDecorator.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeTranslation = this.handleChangeTranslation.bind(this);
     this.getSavedSelection = this.getSavedSelection.bind(this);
     this.setSavedSelection = this.setSavedSelection.bind(this);
 
@@ -73,7 +74,6 @@ class SlateEditor extends Component {
 
     this.editor = null;
     this.selectionTimeout = null;
-    console.log(props)
   }
 
   getSavedSelection() {
@@ -98,19 +98,31 @@ class SlateEditor extends Component {
     editor.getSavedSelection = this.getSavedSelection;
     editor.setSavedSelection = this.setSavedSelection;
     editor.uid = uid || this.state.uid;
-    console.log('Creating editor')
-
     return editor;
   }
 
   handleChange(value) {
-    console.log('Is value changing?? 2', value)
     ReactDOM.unstable_batchedUpdates(() => {
       this.setState({ internalValue: value });
       if (this.props.onChange && !isEqual(value, this.props.value)) {
         this.props.onChange(value, this.editor);
       }
     });
+  }
+
+  handleChangeTranslation(event) {
+    if (!event.target.value) {
+      return
+    }
+
+    try {
+      const value = JSON.parse(event.target.value);
+      ReactDOM.unstable_batchedUpdates(() => {
+        this.setState({ internalValue: value });
+        this.props.onChange(value, this.editor);
+        this.state.editor.children = value
+      });
+    } catch (error) {}
   }
 
   multiDecorator([node, path]) {
@@ -123,7 +135,6 @@ class SlateEditor extends Component {
   }
 
   componentDidMount() {
-    console.log('MOUNT')
     // watch the dom change
 
     if (this.props.selected) {
@@ -149,7 +160,6 @@ class SlateEditor extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('UPDATING SLATE')
     if (!isEqual(prevProps.extensions, this.props.extensions)) {
       this.setState({ editor: this.createEditor() });
       return;
@@ -161,8 +171,6 @@ class SlateEditor extends Component {
     ) {
       const { editor } = this.state;
       editor.children = this.props.value;
-
-      console.log('Is value changing??', this.props.value, this.state.internalValue)
 
       if (this.props.defaultSelection) {
         const selection = parseDefaultSelection(
@@ -348,7 +356,10 @@ class SlateEditor extends Component {
                 return <Helper key={i} editor={editor} />;
               })}
             
-            <textarea></textarea>
+            <textarea
+              style={{display: 'none'}}
+              onChange={this.handleChangeTranslation}>    
+            </textarea>
             {this.props.debug ? (
               <ul>
                 <li>{selected ? 'selected' : 'no-selected'}</li>
