@@ -1,8 +1,12 @@
+#page-add-translation .block-translatable,
+#page-add-translation .field-translatable,
 #page-compare-translation .block-translatable,
 #page-compare-translation .field-translatable {
     display: flex;
     justify-content: space-between;
 }
+
+#page-add-translation .googleTranslateButton,
 #page-compare-translation .googleTranslateButton {
     padding: 0.5rem;
     margin-bottom: 1em;
