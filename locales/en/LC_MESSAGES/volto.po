@@ -1,8 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-07-03T10:34:04.052Z\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-22T13:19:41.688Z\n"
+"PO-Revision-Date: \n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Language: \n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,24 +19,24 @@ msgstr ""
 #. Default: "No Block found"
 #: components/GoogleTranslate/GoogleTranslateButton
 msgid "No Block found"
-msgstr ""
+msgstr "No Block found"
 
 #. Default: "No Block found to apply the translation. This means there is no text block in the same position"
 #: components/GoogleTranslate/GoogleTranslateButton
 msgid "No Block found to apply the translation. This means there is no text block in the same position"
-msgstr ""
+msgstr "No Block found to apply the translation. This means there is no text block in the same position"
 
 #. Default: "Redo"
 #: config/translations
 msgid "Redo"
-msgstr ""
+msgstr "Redo"
 
 #. Default: "Undo"
 #: config/translations
 msgid "Undo"
-msgstr ""
+msgstr "Undo"
 
 #. Default: "translate"
 #: components/GoogleTranslate/GoogleTranslateButton
 msgid "translate"
-msgstr ""
+msgstr "translate"

@@ -16,6 +16,16 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
 
+#. Default: "No Block found"
+#: components/GoogleTranslate/GoogleTranslateButton
+msgid "No Block found"
+msgstr "No s'ha trobat el bloc"
+
+#. Default: "No Block found to apply the translation. This means there is no text block in the same position"
+#: components/GoogleTranslate/GoogleTranslateButton
+msgid "No Block found to apply the translation. This means there is no text block in the same position"
+msgstr "No s'ha trobat un bloc on aplicar la traducció. Això vol dir que no hi ha un bloc de tipus text a la mateixa posició"
+
 #. Default: "Redo"
 #: config/translations
 msgid "Redo"
@@ -25,3 +35,8 @@ msgstr "Refer"
 #: config/translations
 msgid "Undo"
 msgstr "Desfer"
+
+#. Default: "translate"
+#: components/GoogleTranslate/GoogleTranslateButton
+msgid "translate"
+msgstr "traduïr"

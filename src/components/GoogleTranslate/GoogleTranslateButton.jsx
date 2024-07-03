@@ -44,15 +44,12 @@ const InnerGoogleTranslateButton = ({node = false, fieldId = false, value = fals
     if (node) {
       const nodeId = node.getAttribute('data-rbd-draggable-id');
       const nodeValue = translationObject?.blocks?.[nodeId]?.value
-
-      if (!nodeValue) return;
-      dispatch(getGoogleTranslateText(nodeValue, sourceLang, targetLang)).then(setTranslation(translation + 1));
-    }
-
-    if (value) {
       const blocks = document.querySelectorAll('.new-translation .blocks-form .block-editor-slate')
       const nodeIndex = getNodeIndex(node)
       const targetBlock = blocks?.[nodeIndex]
+
+      if (!nodeValue) return;
+
       if (!targetBlock) {
         toast.error(
           <Toast
@@ -63,7 +60,11 @@ const InnerGoogleTranslateButton = ({node = false, fieldId = false, value = fals
         );
         return
       }
-      
+
+      dispatch(getGoogleTranslateText(nodeValue, sourceLang, targetLang)).then(setTranslation(translation + 1));
+    }
+
+    if (value) {
       dispatch(getGoogleTranslateText(value, sourceLang, targetLang)).then(setTranslation(translation + 1));
     }
   };
@@ -129,7 +130,7 @@ const InnerGoogleTranslateButton = ({node = false, fieldId = false, value = fals
 
   return (
     <>
-      <span className="ui button" onClick={translate}>
+      <span className="googleTranslateButton ui button" onClick={translate}>
         <img  src={GTranslateImg} alt={intl.formatMessage(messages.translate)}/>
       </span>
     </>

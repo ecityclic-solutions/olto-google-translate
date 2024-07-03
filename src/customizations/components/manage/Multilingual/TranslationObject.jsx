@@ -22,6 +22,7 @@ const messages = defineMessages({
   },
 });
 import { GoogleTranslateButton } from '../../../../components';
+import '../../../../components/GoogleTranslate/GoogleTranslate.css';
 
 
 const TranslationObject = ({
@@ -192,25 +193,26 @@ const TranslationObject = ({
                   </Segment>,
                   <Segment attached key={`fieldset-contents-${item.title}`}>
                     {map(item.fields, (field, index) => (
-                      <>
-                      <Field
-                        {...schema.properties[field]}
-                        isDisabled={true}
-                        id={field}
-                        formData={translationObject}
-                        focus={false}
-                        value={translationObject[field]}
-                        required={schema.required.indexOf(field) !== -1}
-                        key={field}
-                        onChange={() => {}}
-                      />
-                      {(item?.id === 'default' && schema.properties[field]?.type === 'string' && translationObject[field]) && (
-                        <GoogleTranslateButton
-                          fieldId={field} value={translationObject[field]}
-                          sourceLang={lang} targetLang={targetLang} intl={intl}
-                          translationObject={translationObject} />
-                      )}
-                      </>
+                      <div className="field-translatable" key={field}>
+                        <Field
+                          {...schema.properties[field]}
+                          isDisabled={true}
+                          id={field}
+                          formData={translationObject}
+                          focus={false}
+                          value={translationObject[field]}
+                          required={schema.required.indexOf(field) !== -1}
+                          onChange={() => {}}
+                        />
+                        {(item?.id === 'default' && schema.properties[field]?.type === 'string' && translationObject[field]) && (
+                          <div>
+                            <GoogleTranslateButton
+                              fieldId={field} value={translationObject[field]}
+                              sourceLang={lang} targetLang={targetLang} intl={intl}
+                              translationObject={translationObject} />
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </Segment>,
                 ])}
