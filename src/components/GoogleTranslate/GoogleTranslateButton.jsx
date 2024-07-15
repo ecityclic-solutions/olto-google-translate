@@ -17,6 +17,14 @@ const messages = defineMessages({
     id: 'translate',
     defaultMessage: 'translate',
   },
+  noMoreQuote: {
+    id: 'Quota exhausted',
+    defaultMessage: 'Quota exhausted',
+  },
+  noMoreQuoteDescription: {
+    id: 'Quota of Google Translate API exhausted',
+    defaultMessage: 'Quota of Google Translate API exhausted',
+  },
   noBlockFound: {
     id: 'No Block found',
     defaultMessage: 'No Block found',
@@ -70,6 +78,17 @@ const InnerGoogleTranslateButton = ({node = false, fieldId = false, value = fals
   };
 
   const applyTranslation = () => {
+    if (translatedText?.error) {
+      toast.error(
+        <Toast
+          error
+          title={intl.formatMessage(messages.noMoreQuote)}
+          content={intl.formatMessage(messages.noMoreQuoteDescription)}
+        />,
+      );
+      return
+    }
+
     if (node) {
       applyTranslationNode()
     } else {

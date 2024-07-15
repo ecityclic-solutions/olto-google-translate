@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-07-03T10:34:04.052Z\n"
+"POT-Creation-Date: 2024-07-15T11:23:19.842Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -21,6 +21,16 @@ msgstr ""
 #. Default: "No Block found to apply the translation. This means there is no text block in the same position"
 #: components/GoogleTranslate/GoogleTranslateButton
 msgid "No Block found to apply the translation. This means there is no text block in the same position"
+msgstr ""
+
+#. Default: "Quota exhausted"
+#: components/GoogleTranslate/GoogleTranslateButton
+msgid "Quota exhausted"
+msgstr ""
+
+#. Default: "Quota of Google Translate API exhausted"
+#: components/GoogleTranslate/GoogleTranslateButton
+msgid "Quota of Google Translate API exhausted"
 msgstr ""
 
 #. Default: "Redo"

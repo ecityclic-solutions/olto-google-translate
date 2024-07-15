@@ -26,6 +26,16 @@ msgstr "No se ha encontrado el bloque"
 msgid "No Block found to apply the translation. This means there is no text block in the same position"
 msgstr "No se ha encontrado un bloque donde aplicar la traducción. Esto significa que no hay un bloque de tipo texto en la misma posición"
 
+#. Default: "Quota exhausted"
+#: components/GoogleTranslate/GoogleTranslateButton
+msgid "Quota exhausted"
+msgstr "Cuota agotada"
+
+#. Default: "Quota of Google Translate API exhausted"
+#: components/GoogleTranslate/GoogleTranslateButton
+msgid "Quota of Google Translate API exhausted"
+msgstr "Cuota de la API de Google Translate agotada"
+
 #. Default: "Redo"
 #: config/translations
 msgid "Redo"
