@@ -204,8 +204,11 @@ const TranslationObject = ({
                           required={schema.required.indexOf(field) !== -1}
                           onChange={() => {}}
                         />
-                        {(item?.id === 'default' && schema.properties[field]?.type === 'string' && translationObject[field]) && (
-                          <div>
+
+
+                        {(item?.id === 'default' && schema.properties[field]?.type === 'string' && translationObject[field]
+                          && schema.properties[field]?.multilingual_options?.language_independent != 'true') && (
+                          <div>                      
                             <GoogleTranslateButton
                               fieldId={field} value={translationObject[field]}
                               sourceLang={lang} targetLang={targetLang} intl={intl}
